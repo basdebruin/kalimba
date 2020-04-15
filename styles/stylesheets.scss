@@ -1,0 +1,47 @@
+// style for kalimba web app
+// bas de bruin
+
+$color: #eee;
+$background: #222;
+
+$fonts: -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+
+$width: 600px;
+
+body, html {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    font-size: 20px;
+}
+
+body {
+    font-family: $fonts;
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    line-height: 1.7em;
+    & * {
+        font-weight: normal;
+    }
+    //
+    background: $background;
+    background: src("images/dark_wood_pattern.jpg");
+    color: $color;
+    & * {
+        box-sizing: border-box;
+    }
+
+    // to prevent it from scrolling:
+    width: 100%;
+    position: fixed;
+}
+
+.container {
+    width: 100%;
+    max-width: $width;
+    margin: 0;
+    padding: 1rem;
+}
