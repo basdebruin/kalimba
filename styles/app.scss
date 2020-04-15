@@ -1,0 +1,50 @@
+// app scss file for kalimba app
+// bas de bruin
+
+@import 'head';
+
+#tines {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.3rem;
+}
+
+.tine {
+    background: #ddd;
+    border: none;
+    border-radius: 2rem;
+
+    width: 3rem;
+    height: 20rem;
+
+    // make tines in the center bigger
+    &:nth-child(2), &:nth-last-child(2) {
+        height: 20rem + 2rem;
+    }
+    &:nth-child(3) {
+        height: 20rem + 4rem;
+    }
+
+    // move tine downward
+    transition: transform .2s;
+    &:hover {
+        transform: perspective(400px) rotateX(-10deg) scale(0.93) translateY(-2px);
+    }
+}
+
+#hole {
+    position: fixed;
+    top: 72vh;
+    left: calc(50% - 4rem);
+    width: 8rem;
+    height: 8rem;
+    border-radius: 100%;
+
+    background: $background;
+    border: solid 3px #666;
+}

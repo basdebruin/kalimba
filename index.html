@@ -3,11 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>Kalimba</title>
     <meta name="author" content="Bas de Bruin">
     <meta name="description" content="Playful Kalimba WebApp">
-    <link rel="stylesheet" href="stylesheet.css" type="text/css">
+    <link rel="stylesheet" href="styles/app.min.css" type="text/css">
 
     <!-- PIP Library for unified pointer events with mouse and touch -->
     <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
@@ -16,8 +17,15 @@
 <body>
     <div class="container">
 
-        <button class="tine" data-note="60"></button>
+        <div id="tines">
 
+            <button class="tine" data-note="60"></button>
+            <button class="tine" data-note="61"></button>
+            <button class="tine" data-note="62"></button>
+            <button class="tine" data-note="63"></button>
+            <button class="tine" data-note="64"></button>
+            
+        </div>
 
         <span id="hole"></span>
 
