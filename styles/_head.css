@@ -14,7 +14,7 @@ body {
   letter-spacing: 0.03em;
   line-height: 1.7em;
   background: #111;
-  background-image: url("/images/dark_wood_pattern.jpg");
+  background-image: url("../images/dark_wood_pattern.jpg");
   background-size: cover;
   color: #eee;
   box-sizing: border-box;

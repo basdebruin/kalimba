@@ -32,7 +32,7 @@
         height: 18rem + 4rem;
     }
 
-    // move tine downward
+    // move tine downward in 3d
     transition: transform .15s;
     &.active {
         transform: perspective(300px) rotateX(-10deg) scale(0.9) translateY(-2px);
