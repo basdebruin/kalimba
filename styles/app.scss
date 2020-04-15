@@ -19,27 +19,29 @@
     border: none;
     border-radius: 2rem;
 
+    pointer-events: all;
+
     width: 3rem;
-    height: 20rem;
+    height: 18rem;
 
     // make tines in the center bigger
     &:nth-child(2), &:nth-last-child(2) {
-        height: 20rem + 2rem;
+        height: 18rem + 2rem;
     }
     &:nth-child(3) {
-        height: 20rem + 4rem;
+        height: 18rem + 4rem;
     }
 
     // move tine downward
-    transition: transform .2s;
-    &:hover {
-        transform: perspective(400px) rotateX(-10deg) scale(0.93) translateY(-2px);
+    transition: transform .15s;
+    &.active {
+        transform: perspective(300px) rotateX(-10deg) scale(0.9) translateY(-2px);
     }
 }
 
 #hole {
     position: fixed;
-    top: 72vh;
+    top: 70vh;
     left: calc(50% - 4rem);
     width: 8rem;
     height: 8rem;
