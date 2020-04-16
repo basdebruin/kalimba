@@ -3,7 +3,7 @@
 
 var tines;
 
-const DEBUG = true;
+const DEBUG = false;
 
 // y-axis mouse movement
 var lastMousePosition = 0;
