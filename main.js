@@ -18,7 +18,7 @@ function init() {
     tines.forEach( elem => {
 
         elem.addEventListener('pointerdown',  event => tineEnter(elem, event));
-        elem.addEventListener('pointerup',    event => tineLeave(elem, event));
+        elem.addEventListener('pointerup',    ()    => tineLeave(elem));
         elem.addEventListener('pointermove',  event => tineMove(elem, event));
 
     });
@@ -33,27 +33,14 @@ var active = false;
 function tineEnter(elem, event) {
     active = true;
 
-    // add active classs
+    Tone.context.resume();
+
+    // add active class
     if (!elem.classList.contains('active')) elem.classList.add('active');
 
     // reset lastMousePosition and velocity
     lastMousePosition = event.clientY - 1;
     mouseVelocity = 1;
-}
-
-function tineLeave(elem, event) {
-    if (active) {
-        active = false;
-
-        // remove active class
-        if (elem.classList.contains('active')) elem.classList.remove('active');
-
-        // debug velocity
-        if (DEBUG) {
-            console.log("vel y: " + mouseVelocity);
-            document.getElementById('debug').innerHTML = "vel y: " + mouseVelocity;
-        }
-    }
 }
 
 function tineMove(elem, event) {
@@ -66,8 +53,25 @@ function tineMove(elem, event) {
     if (active) {
         const rect = elem.getBoundingClientRect();
         if (rect.bottom - 10 < event.clientY) {
-            elem.removeEventListener('pointermove', tineMove);
             tineLeave(elem);
+        }
+    }
+}
+
+function tineLeave(elem) {
+    if (active) {
+        active = false;
+
+        // remove active class
+        if (elem.classList.contains('active')) elem.classList.remove('active');
+
+        // TRIGGER SYNTH
+        synth.triggerAttackRelease(elem.dataset.note, '8n');
+
+        // debug velocity
+        if (DEBUG) {
+            console.log("vel y: " + mouseVelocity);
+            document.getElementById('debug').innerHTML = "vel y: " + mouseVelocity;
         }
     }
 }
