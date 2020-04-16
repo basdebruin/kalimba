@@ -3,46 +3,71 @@
 
 var tines;
 
+const DEBUG = true;
 
-// check if device has mouse
-var isTouchDevice = true;
-document.addEventListener('mousemove', function() {
-    isTouchDevice = false;
-});
-
+// y-axis mouse movement
+var lastMousePosition = 0;
+var mouseVelocity = 0;
 
 // INIT called on body load
 function init() {
     
     tines = document.getElementById('tines').childNodes;
     
-
     // add button event listeners
     tines.forEach( elem => {
 
-        elem.addEventListener('pointerdown',  () => tineEnter(elem));
-        elem.addEventListener('pointerup',    () => tineLeave(elem));
-        elem.addEventListener('pointermove',  (event) => tineMove(elem, event));
+        elem.addEventListener('pointerdown',  event => tineEnter(elem, event));
+        elem.addEventListener('pointerup',    event => tineLeave(elem, event));
+        elem.addEventListener('pointermove',  event => tineMove(elem, event));
 
     });
 
 }
 
+
+
+var active = false;
+
 // tine enter and leave functions
-function tineEnter(elem) {
+function tineEnter(elem, event) {
+    active = true;
+
+    // add active classs
     if (!elem.classList.contains('active')) elem.classList.add('active');
+
+    // reset lastMousePosition and velocity
+    lastMousePosition = event.clientY - 1;
+    mouseVelocity = 1;
 }
 
-function tineLeave(elem) {
-    if (elem.classList.contains('active')) elem.classList.remove('active');
+function tineLeave(elem, event) {
+    if (active) {
+        active = false;
+
+        // remove active class
+        if (elem.classList.contains('active')) elem.classList.remove('active');
+
+        // debug velocity
+        if (DEBUG) {
+            console.log("vel y: " + mouseVelocity);
+            document.getElementById('debug').innerHTML = "vel y: " + mouseVelocity;
+        }
+    }
 }
 
 function tineMove(elem, event) {
-    // check if still touching inside tine (only works on phones)
-    const rect = elem.getBoundingClientRect();
-    if (rect.bottom - 10 < event.clientY) {
-        tineLeave(elem);
-        console.log("tineMove end");
-        elem.removeEventListener('pointermove', tineMove);
+    // calc velocity
+    mouseVelocity = event.clientY - lastMousePosition;
+    // set lastMousePosition
+    lastMousePosition = event.clientY;
+
+    // check if still touching inside tine
+    if (active) {
+        const rect = elem.getBoundingClientRect();
+        if (rect.bottom - 10 < event.clientY) {
+            elem.removeEventListener('pointermove', tineMove);
+            tineLeave(elem);
+        }
     }
 }
