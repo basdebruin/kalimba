@@ -65,8 +65,11 @@ function tineLeave(elem) {
         // remove active class
         if (elem.classList.contains('active')) elem.classList.remove('active');
 
+        // calc velocity
+        const velocity = Math.abs(mouseVelocity*0.01) + 0.1;
+
         // TRIGGER SYNTH
-        synth.triggerAttackRelease(elem.dataset.note, '8n');
+        synth.triggerAttackRelease(elem.dataset.note, '8n', Tone.now(), velocity);
 
         // debug velocity
         if (DEBUG) {
